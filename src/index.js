@@ -2,17 +2,30 @@ const express = require('express')
 
 const app = express()
 
+app.use(express.json())
+
 // localhost:3333
 
 /*
     GET - Buscar uma informação dentro do servidor
     POST - Inserir uma informação no servidor
-    PUT - Alterar uma informação no servidor
-    PATCH - Alterar uma informação específica
+    PUT - Editar uma informação no servidor
+    PATCH - Editar uma informação específica
     DELETE - Apagar uma informação do servidor
 */
 
+/* 
+
+    Tipos de parâmetros
+    
+    Route Params => Identificar um recurso editar/apagar/buscar
+    Query Params => Paginação / Filtro
+    Body Params => Os objetos inserção/alteração (JSON)
+*/
+
 app.get("/courses", (request, response) => {
+    const query = request.query
+    console.log(query)
     return response.json([
         "Curso 1",
         "Curso 2",
@@ -21,6 +34,8 @@ app.get("/courses", (request, response) => {
 })
 
 app.post("/courses", (request, response) => {
+    const body = request.body
+    console.log(body)
     return response.json([
         "Curso 1",
         "Curso 2",
@@ -30,6 +45,8 @@ app.post("/courses", (request, response) => {
 })
 
 app.put("/courses/:id", (request, response) => {
+    const { id } = request.params
+    console.log(id)
     return response.json([
         "Curso 6",
         "Curso 2",
